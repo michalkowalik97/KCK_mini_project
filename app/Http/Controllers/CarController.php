@@ -23,7 +23,7 @@ class CarController extends Controller
      */
     public function create()
     {
-        //
+        echo "Create new car";
     }
 
     /**
@@ -45,7 +45,8 @@ class CarController extends Controller
      */
     public function show($id)
     {
-        //
+
+        return view('cars.show');
     }
 
     /**

@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row justify-content-end pb-4">
             <div class="col-1">
-                <a href="#" class="w3-button w3-hover-green w3-black">+Dodaj</a>
+                <a href="/cars/create" class="w3-button w3-hover-green w3-black">+Dodaj</a>
             </div>
         </div>
         <div class="row {{--align-items-center align-content-center align-self-center--}} {{--justify-content-center--}}">
@@ -30,7 +30,7 @@
                 <div class="card-body">
                     <h4 class="card-title">Moje ulubione auto</h4>
                     <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
-                    <a href="https://www.google.com/" class="{{--btn btn-primary --}}stretched-link"></a>
+                    <a href="/cars/1" class="{{--btn btn-primary --}}stretched-link"></a>
                 </div>
             </div>
         @endfor
