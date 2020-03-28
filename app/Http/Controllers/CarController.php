@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Car;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class CarController extends Controller
 {
@@ -13,7 +16,10 @@ class CarController extends Controller
      */
     public function index()
     {
-        return view('cars.list');
+        $cars = Car::user()->get();
+        //dd($cars);
+
+        return view('cars.list',compact('cars'));
     }
 
     /**
@@ -23,7 +29,8 @@ class CarController extends Controller
      */
     public function create()
     {
-        echo "Create new car";
+        return view('cars.create');
+
     }
 
     /**
@@ -34,7 +41,38 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'przebieg' => 'numeric|nullable',
+            'car_photo' => 'mimetypes:image/*|file|nullable',
+        ]);
+//name	photo	mileage	user_id	reminder_id	created_at	updated_at
+        $car = new Car();
+        $car->name = $request->name;
+        $car->mileage = $request->przebieg;
+        $car->user_id = Auth::id();
+        if ($request->hasFile('car_photo')){
+            $path = $request->file('car_photo')->store('photos');
+            $car->photo = $path;
+        }
+        $car->save();
+
+        return redirect('/cars');
+            /*dump($request->file('car_photo')->extension());
+        $path = $request->file('car_photo')->store('photos');
+        /*echo "test";
+        dump($request->car_photo);
+        echo "------------------------- <br/>";
+        dump($request->hasFile('car_photo'));
+        echo "------------------------- <br/>";
+        $path = Storage::putFile('photos', $request->file('car_photo'));*/
+        //dd($path);
+
+        /*dd($request->file('photo'));
+        $path = $request->photo->store();
+        echo $path;
+        dd($request->file('photo'));*/
+
     }
 
     /**
