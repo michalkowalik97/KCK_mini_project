@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Car;
+use App\Charts\TestChart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 
 class CarController extends Controller
 {
@@ -17,7 +20,6 @@ class CarController extends Controller
     public function index()
     {
         $cars = Car::user()->get();
-        //dd($cars);
 
         return view('cars.list',compact('cars'));
     }
@@ -44,7 +46,7 @@ class CarController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'przebieg' => 'numeric|nullable',
-            'car_photo' => 'mimetypes:image/*|file|nullable',
+            'car_photo' => 'mimetypes:image/*|file|nullable|max:7000',
         ]);
 //name	photo	mileage	user_id	reminder_id	created_at	updated_at
         $car = new Car();
@@ -83,8 +85,26 @@ class CarController extends Controller
      */
     public function show($id)
     {
+        $car = Car::find($id);
 
-        return view('cars.show');
+        $costs = new TestChart();
+        $costs->minimalist(1)->displayLegend(1);
+        $costs->dataset('koszty','pie',  [rand(10,100),rand(10,100),rand(10,100),rand(10,100)])
+            ->color([/*'#ff0000','#00ff00','#0000ff','#ff7700'*/'rgba(0,0,0,0.0)'])
+            ->backgroundColor(['rgba(255,0,0,0.4)','rgba(0,255,0,0.4)','rgba(0,0,255,0.4)','rgba(255, 119, 0,0.4)']);
+        $costs->labels(['awarie','paliwo','opłaty','naprawy eksploatacyjne']);
+
+        $mileage = new TestChart();
+        $mileage->dataset('przebieg','line',[204890,249876,255765,256234,287890])->color(['rgba(0, 179, 255, 0.8)'])->backgroundColor(['rgba(0, 179, 255, 0.1)']);
+        $mileage->labels(['23-01-2019','01-02-2019','30-04-2019','15-05-2019','22-07-2019']);
+
+
+
+        if ($car == null)
+            return redirect('/cars')->withErrors(['Wystąpił błąd spróbuj ponownie lub skontaktuj się z administratorem.']);
+
+      //  dd($car);
+        return view('cars.show',compact('car','costs','mileage'));
     }
 
     /**

@@ -40,8 +40,9 @@
                     <div class="form-group">
                         <label>Dodaj zdjęcie samochodu</label><br />
                         <input type="file" name="car_photo" accept="image/*" @error('car_photo') class=" w3-border-bottom w3-border-red w3-pale-red" @enderror value="{{ old('car_photo') }}">
+                        <div class="text-black-50 h6">Maksymalny rozmiar zdjęcia to 7MB.</div>
                         @error('car_photo')
-                        <div class="text-danger">{{ $message }}</div>
+                         <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
 

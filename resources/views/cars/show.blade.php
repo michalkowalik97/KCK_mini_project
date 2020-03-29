@@ -4,19 +4,34 @@
     - Lista samochodów
 @endsection
 
-@section('content')
+@section('links')
+    @component('components.links',
+    ['links'=>["Koszty"=>"/car/".$car->id."/costs", "Statystyki"=>"/car/".$car->id."/stats"],
+    'active'=>"statystyki"]
+    )
+    @endcomponent
 
-    <div class="container">
-        <div class="row justify-content-end pb-4">
-            <div class="col-1">
-                <a href="/costs/create" class="w3-button w3-hover-green w3-black">+Dodaj</a>
+@endsection
+
+@section('content')
+    <div id="app">
+        <div class="row justify-content-center">
+            <div class="col-10">
+                {!! $costs->container() !!}
             </div>
         </div>
-        <div class="row {{--align-items-center align-content-center align-self-center--}} {{--justify-content-center--}}">
-            <div class="col-2 sidenav w3-border"> @for($i=0;$i<15;$i++) side panel @endfor </div>
-            <div class="col-10 w3-border">  @for($i=0;$i<1500;$i++) content @endfor </div>
-
-
+        <br><br>
+        <div class="row justify-content-center">
+            <div class="col-10">
+                {!! $mileage->container() !!}
+            </div>
         </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+
+    {!! $costs->script() !!}
+    {!! $mileage->script() !!}
+
 @endsection
+
