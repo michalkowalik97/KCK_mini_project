@@ -14,7 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if (Auth::check()) {
+        return redirect('/cars');
+    } else {
+        return view('welcome');
+    }
 });
 
 Auth::routes();
@@ -23,5 +27,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
 
-    Route::resource('cars','CarController');
+    Route::get("/car/{id}/stats", "CostController@stats");
+    Route::get("/car/{id}/costs", "CostController@index");
+
+    Route::resource('cars', 'CarController');
 });

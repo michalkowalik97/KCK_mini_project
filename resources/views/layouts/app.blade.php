@@ -42,7 +42,7 @@
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/cars') }}">
+            <a class="navbar-brand" href="{{ url('/') }}">
                 <b>{{ config('app.name', 'Laravel') }}</b>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"

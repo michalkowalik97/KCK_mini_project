@@ -26,6 +26,7 @@
             @forelse($cars as $car)
                 <div class="w3-card card m-1 @if(1 % 5 == 0){{-- bg-danger text-white--}} w3-orange @endif"
                      style="width:32%">
+
                     <img class="w3-border-bottom w3-border-dark card-img-top"
                          {{--src="https://cdn.pixabay.com/photo/2016/04/01/09/11/car-1299198_960_720.png"--}}
                          @if($car->photo == '' || !$car->photo)
@@ -38,7 +39,7 @@
                         <h4 class="card-title h3">{{$car->name}}</h4>
                         <p class="card-text h6"> Ostatni zarejestrowany
                             przebieg: {{number_format($car->mileage,0,".",' ')}} km</p>
-                        <a href="/cars/{{$car->id}}" class="{{--btn btn-primary --}}stretched-link"></a>
+                        <a href="/car/{{$car->id}}/costs" class="{{--btn btn-primary --}}stretched-link"></a>
                     </div>
                 </div>
             @empty
