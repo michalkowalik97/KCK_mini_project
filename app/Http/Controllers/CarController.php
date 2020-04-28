@@ -48,7 +48,7 @@ class CarController extends Controller
             'przebieg' => 'numeric|nullable',
             'car_photo' => 'mimetypes:image/*|file|nullable|max:7000',
         ]);
-//name	photo	mileage	user_id	reminder_id	created_at	updated_at
+
         $car = new Car();
         $car->name = $request->name;
         $car->mileage = $request->przebieg;
@@ -60,21 +60,6 @@ class CarController extends Controller
         $car->save();
 
         return redirect('/cars');
-            /*dump($request->file('car_photo')->extension());
-        $path = $request->file('car_photo')->store('photos');
-        /*echo "test";
-        dump($request->car_photo);
-        echo "------------------------- <br/>";
-        dump($request->hasFile('car_photo'));
-        echo "------------------------- <br/>";
-        $path = Storage::putFile('photos', $request->file('car_photo'));*/
-        //dd($path);
-
-        /*dd($request->file('photo'));
-        $path = $request->photo->store();
-        echo $path;
-        dd($request->file('photo'));*/
-
     }
 
     /**
@@ -87,16 +72,16 @@ class CarController extends Controller
     {
         $car = Car::find($id);
 
-        $costs = new TestChart();
+     /*   $costs = new TestChart();
         $costs->minimalist(1)->displayLegend(1);
         $costs->dataset('koszty','pie',  [rand(10,100),rand(10,100),rand(10,100),rand(10,100)])
-            ->color([/*'#ff0000','#00ff00','#0000ff','#ff7700'*/'rgba(0,0,0,0.0)'])
+            ->color([/*'#ff0000','#00ff00','#0000ff','#ff7700'*//*'rgba(0,0,0,0.0)'])
             ->backgroundColor(['rgba(255,0,0,0.4)','rgba(0,255,0,0.4)','rgba(0,0,255,0.4)','rgba(255, 119, 0,0.4)']);
         $costs->labels(['awarie','paliwo','opłaty','naprawy eksploatacyjne']);
 
         $mileage = new TestChart();
         $mileage->dataset('przebieg','line',[204890,249876,255765,256234,287890])->color(['rgba(0, 179, 255, 0.8)'])->backgroundColor(['rgba(0, 179, 255, 0.1)']);
-        $mileage->labels(['23-01-2019','01-02-2019','30-04-2019','15-05-2019','22-07-2019']);
+        $mileage->labels(['23-01-2019','01-02-2019','30-04-2019','15-05-2019','22-07-2019']);*/
 
 
 
@@ -104,7 +89,7 @@ class CarController extends Controller
             return redirect('/cars')->withErrors(['Wystąpił błąd spróbuj ponownie lub skontaktuj się z administratorem.']);
 
       //  dd($car);
-        return view('cars.show',compact('car','costs','mileage'));
+        return view('cars.show',compact('car'/*,'costs','mileage'*/));
     }
 
     /**
@@ -115,7 +100,7 @@ class CarController extends Controller
      */
     public function edit($id)
     {
-        //
+       echo "test";
     }
 
     /**

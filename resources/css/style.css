@@ -1,0 +1,10 @@
+.dl-horizontal dd{
+    display: inline;
+}
+.dl-horizontal dt{
+    display: inline;
+}
+
+.float-right {
+    float:right;
+}

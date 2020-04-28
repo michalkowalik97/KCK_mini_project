@@ -21,7 +21,6 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/w3.css') }}" rel="stylesheet">
 
-    {{--    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">--}}
 
     <style>
 
@@ -35,6 +34,7 @@
             overflow-x: hidden;
             padding: 8px 0;
         }
+
 
     </style>
 </head>

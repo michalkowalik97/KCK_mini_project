@@ -33,13 +33,13 @@
                              src="{{asset('photos/default.png')}}"
                          @else
                              src="{{asset($car->photo)}}"
-                         @endif
+                    @endif
                          alt="Car photo" style="width:100%">
                     <div class="card-body">
                         <h4 class="card-title h3">{{$car->name}}</h4>
                         <p class="card-text h6"> Ostatni zarejestrowany
                             przebieg: {{number_format($car->mileage,0,".",' ')}} km</p>
-                        <a href="/car/{{$car->id}}/costs" class="{{--btn btn-primary --}}stretched-link"></a>
+                        <a href="/cars/{{$car->id}}{{--/costs--}}" class="{{--btn btn-primary --}}stretched-link"></a>
                     </div>
                 </div>
             @empty
