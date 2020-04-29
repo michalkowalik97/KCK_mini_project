@@ -17,13 +17,14 @@
 
         <div class="row justify-content-end pb-4">
             <div class="col-1">
-                <a href="/cars/create" class="w3-button w3-hover-green w3-black">+Dodaj</a>
+                <a href="/cars/create" class="w3-button w3-hover-green w3-black">Dodaj <i class="fas fa-plus"></i></a>
             </div>
         </div>
         <div class="row">
 
 
             @forelse($cars as $car)
+
                 <div class="w3-card card m-1 @if(1 % 5 == 0){{-- bg-danger text-white--}} w3-orange @endif"
                      style="width:32%">
 
@@ -36,7 +37,7 @@
                     @endif
                          alt="Car photo" style="width:100%">
                     <div class="card-body">
-                        <h4 class="card-title h3">{{$car->name}}</h4>
+                        <h4 class="card-title h3">{{$car->renderName()}}</h4>
                         <p class="card-text h6"> Ostatni zarejestrowany
                             przebieg: {{number_format($car->mileage,0,".",' ')}} km</p>
                         <a href="/cars/{{$car->id}}{{--/costs--}}" class="{{--btn btn-primary --}}stretched-link"></a>

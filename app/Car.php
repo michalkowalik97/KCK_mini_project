@@ -19,4 +19,14 @@ class Car extends Model
         return $query->where('user_id', Auth::id());
     }
 
+    public function renderName()
+    {
+        $colors = [
+            "PB" => 'success',
+            "ON" => 'danger',
+            "LPG" => 'primary',
+        ];
+        $badge = ($this->alternative_fuel) ? '<br/><span class="badge badge-'.$colors[$this->fuel].'">'.$this->fuel.'</span>&nbsp<span class="badge badge-'.$colors[$this->alternative_fuel].'">'.$this->alternative_fuel.'</span> ' : '<br/><span class="badge badge-'.$colors[$this->fuel].'">'.$this->fuel.'</span>';
+        echo $this->name.' '.$badge;
+    }
 }

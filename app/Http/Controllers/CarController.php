@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 
 class CarController extends Controller
@@ -46,17 +47,22 @@ class CarController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'przebieg' => 'numeric|nullable',
+            'paliwo' => 'required',
+            'paliwo_alternatywne' => 'different:paliwo|nullable',
             'car_photo' => 'mimetypes:image/*|file|nullable|max:7000',
         ]);
-
         $car = new Car();
         $car->name = $request->name;
         $car->mileage = $request->przebieg;
         $car->user_id = Auth::id();
+        $car->fuel = $request->paliwo;
+        $car->alternative_fuel = $request->paliwo_alternatywne;
+
         if ($request->hasFile('car_photo')){
             $path = $request->file('car_photo')->store('photos');
             $car->photo = $path;
         }
+
         $car->save();
 
         return redirect('/cars');
@@ -100,7 +106,7 @@ class CarController extends Controller
      */
     public function edit($id)
     {
-       echo "test";
+       echo "edit";
     }
 
     /**

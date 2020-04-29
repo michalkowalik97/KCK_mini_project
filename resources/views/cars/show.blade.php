@@ -6,8 +6,8 @@
 
 @section('links')
     @component('components.links',
-    ['links'=>["Koszty"=>"/car/".$car->id."/costs", "Statystyki"=>"/car/".$car->id."/stats"],
-    'active'=>""]
+    ['links'=>["Podsumowanie"=>"/cars/".$car->id,"Koszty"=>"/car/".$car->id."/costs", "Statystyki"=>"/car/".$car->id."/stats"],
+    'active'=>"Podsumowanie"]
     )
     @endcomponent
 
@@ -15,17 +15,21 @@
 
 @section('content')
     <div class="container {{--px-5--}}">
+        <div class="row mb-3">
+            <div class="col-1">
+                <a href="/cars/" class="w3-button w3-hover-green w3-black w3-small "><i class="fas fa-arrow-left text-white"></i> Powrót do listy</a>
+            </div>
+        </div>
         <div class="row ">
-            <div class="col-12 col-xl-4 mr-0  mr-xl-5  pt-1 mb-5 mb-xl-0 w3-border w3-border-blue">
+            <div class="col-12 col-lg-4 mr-0  mr-lg-5  pt-1 mb-5 mb-lg-0 w3-border w3-border-blue">
                 <img @if($car->photo == '' || !$car->photo)
                      src="{{asset('photos/default.png')}}"
                      @else
                      src="{{asset($car->photo)}}"
                      @endif
                      alt="Car photo" style="width:100%">
-                <div class="my-2"><span class="h3">{{$car->name}}</span>
-                    <span class="badge badge-success">PB</span>
-                    <span class="badge badge-primary">LPG</span>
+                <div class="my-2"><span class="h3">{{$car->renderName()}}</span>
+
                     <span class="float-right"> <a
                                 href="/cars/{{$car->id}}/edit"
                                 class="w3-button w3-hover-green w3-black w3-tiny">Edytuj</a></span></div>
@@ -37,37 +41,37 @@
 
                 </dl>
             </div>
-            <div class="col-12   col-xl-7 mr-0 ml-xl-5  pt-1 w3-border w3-border-blue">
+            <div class="col-12   col-lg-7 mr-0 ml-lg-4  pt-1 w3-border w3-border-blue">
                 <div class="my-2"><span class="h3">Podsumowanie:</span> <span class="float-right"> <a
-                                href="/car/{{$car->id}}/stats/add" class="w3-button w3-hover-green w3-black w3-tiny">Dodaj+</a>
+                                href="/car/{{$car->id}}/stats/add" class="w3-button w3-hover-green w3-black w3-tiny">Dodaj <i class="fas fa-plus"></i></a>
                         <a
                                 href="/car/{{$car->id}}/stats" class="w3-button w3-hover-green w3-black w3-tiny">Szczegóły</a></span>
                 </div>
                 <table class="table">
                     <tr>
                         <td>Wydatki ogółem:</td>
-                        <td class="font-weight-bold">xxxxx zł</td>
+                        <td class="font-weight-bold">{{rand(1000,100000)}} zł</td>
                     </tr>
                     <tr>
                         <td>Wydatki na paliwo:</td>
-                        <td>xxx zł</td>
+                        <td>{{rand(100,10000)}} zł</td>
                     </tr>
                     <tr>
                         <td>Wydatki na utrzymanie samochodu:</td>
-                        <td>xxx zł</td>
+                        <td>{{rand(100,10000)}} zł</td>
                     </tr>
                     <tr>
                         <td>Tutaj coś jeszcze:</td>
-                        <td>xxx zł</td>
+                        <td>{{rand(100,10000)}} zł</td>
                     </tr>
                 </table>
 
             </div>
         </div>
-        <div class="row {{--pr-5--}} ">
-            <div class="col-12   mt-5 w3-border w3-border-blue">
+        <div class="row {{--pr-5--}}mr-lg-1  ">
+            <div class="col-12  mt-5 w3-border w3-border-blue">
                 <div class="my-2"><span class="h3">Koszty paliwa:</span> <span class="float-right"> <a
-                                href="/car/{{$car->id}}/fuel/add" class="w3-button w3-hover-green w3-black w3-tiny">Dodaj+</a>
+                                href="/car/{{$car->id}}/fuel/add" class="w3-button w3-hover-green w3-black w3-tiny">Dodaj <i class="fas fa-plus"></i></a>
                         <a
                                 href="/car/{{$car->id}}/fuel" class="w3-button w3-hover-green w3-black w3-tiny">Szczegóły</a></span>
                 </div>
@@ -75,23 +79,23 @@
                 <table class="table">
                     <tr>
                         <td>Wydatki na paliwo ogółem:</td>
-                        <td class="font-weight-bold">xxxxx zł</td>
+                        <td class="font-weight-bold">{{rand(1000,100000)}} zł</td>
                     </tr>
                     <tr>
                         <td>Wydatki na paliwo w bieżącym miesiącu:</td>
-                        <td>xxxxx zł</td>
+                        <td>{{rand(100,10000)}} zł</td>
                     </tr>
                     <tr>
                         <td>Wydatki na benzynę: </td>
-                        <td>xxx zł <span class="badge badge-success">PB</span></td>
+                        <td>{{rand(100,10000)}} zł <span class="badge badge-success">PB</span></td>
                     </tr>
                     <tr>
                         <td>Wydatki na LPG:</td>
-                        <td>xxx zł <span class="badge badge-primary">LPG</span></td>
+                        <td>{{rand(100,10000)}} zł <span class="badge badge-primary">LPG</span></td>
                     </tr>
                     <tr>
                         <td>Średnie miesięczne wydatki na paliwo:</td>
-                        <td>xxx zł</td>
+                        <td>{{rand(100,10000)}} zł</td>
                     </tr>
                 </table>
             </div>
