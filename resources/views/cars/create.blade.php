@@ -83,6 +83,8 @@
                     </div>
 
                     <input type="submit" class="w3-button w3-black w3-hover-green" value="Dodaj">
+                    <a href="{{url()->previous()}}" class="w3-button w3-border w3-white w3-hover-yellow text-decoration-none" >Anuluj</a>
+
                 </form>
             </div>
         </div>

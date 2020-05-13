@@ -106,7 +106,11 @@ class CarController extends Controller
      */
     public function edit($id)
     {
-       echo "edit";
+        $car = Car::find($id);
+        if ($car)
+            return view('cars.edit', compact('car'));
+
+       return redirect("/cars")->withErrors(['Coś poszło nie tak, spróbuj jeszcze raz']);
     }
 
     /**
@@ -118,7 +122,26 @@ class CarController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+          //  'przebieg' => 'numeric|nullable',
+            'paliwo' => 'required',
+            'paliwo_alternatywne' => 'different:paliwo|nullable',
+           // 'car_photo' => 'mimetypes:image/*|file|nullable|max:7000',
+        ]);
+
+        $car = Car::find($id);
+        if (!$car)
+            return redirect()->back()->withErrors(['Coś poszło nie tak, spróbuj jeszcze raz']);
+
+        $car->name = $request->name;
+        $car->fuel = $request->paliwo;
+        $car->alternative_fuel = $request->paliwo_alternatywne;
+        $car->save();
+
+
+     return redirect('/cars/'.$id)->with('message', "Zamiany zostały zapisane.");
+
     }
 
     /**
@@ -130,5 +153,36 @@ class CarController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function editPhoto($id)
+    {
+        $car = Car::find($id);
+        if (!$car)
+            return redirect()->back()->withErrors(['Coś poszło nie tak, spróbuj jeszcze raz']);
+
+        return view('cars.editPhoto', compact('car'));
+
+    }
+
+    public function updatePhoto(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'car_photo' => 'mimetypes:image/*|file|nullable|max:7000',
+        ]);
+
+        $car = Car::find($id);
+        if (!$car)
+            return redirect()->back()->withErrors(['Coś poszło nie tak, spróbuj jeszcze raz']);
+
+        if ($request->hasFile('car_photo')){
+            $path = $request->file('car_photo')->store('photos');
+            $car->photo = $path;
+        }
+
+        $car->save();
+
+        return redirect('/cars/'.$id)->with('message', "Zamiany zostały zapisane.");
+
     }
 }

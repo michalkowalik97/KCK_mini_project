@@ -15,13 +15,25 @@
 
 @section('content')
     <div class="container {{--px-5--}}">
+
+        @if(session("message"))
+            <div class="w3-container py-3 w3-panel w3-blue{{--alert alert-info--}}">
+                {{session("message")}}
+            </div>
+        @endif
         <div class="row mb-3">
             <div class="col-1">
-                <a href="/cars/" class="w3-button w3-hover-green w3-black w3-small "><i class="fas fa-arrow-left text-white"></i> Powrót do listy</a>
+                <a href="/cars/" class="w3-button w3-hover-green w3-black w3-small "><i
+                            class="fas fa-arrow-left text-white"></i> Powrót do listy</a>
             </div>
         </div>
         <div class="row ">
             <div class="col-12 col-lg-4 mr-0  mr-lg-5  pt-1 mb-5 mb-lg-0 w3-border w3-border-blue">
+              <span class="float-right"> <a
+                          href="/cars/{{$car->id}}/edit/photo"
+                          class="w3-button w3-hover-green w3-black w3-tiny">Edytuj zdjęcie</a></span>
+
+
                 <img @if($car->photo == '' || !$car->photo)
                      src="{{asset('photos/default.png')}}"
                      @else
@@ -43,7 +55,8 @@
             </div>
             <div class="col-12   col-lg-7 mr-0 ml-lg-4  pt-1 w3-border w3-border-blue">
                 <div class="my-2"><span class="h3">Podsumowanie:</span> <span class="float-right"> <a
-                                href="/car/{{$car->id}}/stats/add" class="w3-button w3-hover-green w3-black w3-tiny">Dodaj <i class="fas fa-plus"></i></a>
+                                href="/car/{{$car->id}}/stats/add" class="w3-button w3-hover-green w3-black w3-tiny">Dodaj <i
+                                    class="fas fa-plus"></i></a>
                         <a
                                 href="/car/{{$car->id}}/stats" class="w3-button w3-hover-green w3-black w3-tiny">Szczegóły</a></span>
                 </div>
@@ -71,7 +84,8 @@
         <div class="row {{--pr-5--}}mr-lg-1  ">
             <div class="col-12  mt-5 w3-border w3-border-blue">
                 <div class="my-2"><span class="h3">Koszty paliwa:</span> <span class="float-right"> <a
-                                href="/car/{{$car->id}}/fuel/add" class="w3-button w3-hover-green w3-black w3-tiny">Dodaj <i class="fas fa-plus"></i></a>
+                                href="/car/{{$car->id}}/fuel/add" class="w3-button w3-hover-green w3-black w3-tiny">Dodaj <i
+                                    class="fas fa-plus"></i></a>
                         <a
                                 href="/car/{{$car->id}}/fuel" class="w3-button w3-hover-green w3-black w3-tiny">Szczegóły</a></span>
                 </div>
@@ -86,7 +100,7 @@
                         <td>{{rand(100,10000)}} zł</td>
                     </tr>
                     <tr>
-                        <td>Wydatki na benzynę: </td>
+                        <td>Wydatki na benzynę:</td>
                         <td>{{rand(100,10000)}} zł <span class="badge badge-success">PB</span></td>
                     </tr>
                     <tr>
