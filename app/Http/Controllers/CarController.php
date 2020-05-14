@@ -152,7 +152,13 @@ class CarController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $car = Car::find($id);
+        if (!$car)
+            return redirect()->back()->withErrors(['Coś poszło nie tak, spróbuj jeszcze raz']);
+
+        $car->delete();
+
+        return redirect('/cars/')->with('message', "Samochód został usunięty.");
     }
 
     public function editPhoto($id)
@@ -175,11 +181,29 @@ class CarController extends Controller
         if (!$car)
             return redirect()->back()->withErrors(['Coś poszło nie tak, spróbuj jeszcze raz']);
 
+        $oldPhoto = $car->photo;
+
         if ($request->hasFile('car_photo')){
             $path = $request->file('car_photo')->store('photos');
             $car->photo = $path;
         }
 
+        $car->save();
+
+        Storage::delete($oldPhoto);
+
+        return redirect('/cars/'.$id)->with('message', "Zamiany zostały zapisane.");
+
+    }
+
+    public function deletePhoto(Request $request, $id)
+    {
+        $car = Car::find($id);
+        if (!$car)
+            return redirect()->back()->withErrors(['Coś poszło nie tak, spróbuj jeszcze raz']);
+
+        Storage::delete($car->photo);
+        $car->photo = null;
         $car->save();
 
         return redirect('/cars/'.$id)->with('message', "Zamiany zostały zapisane.");

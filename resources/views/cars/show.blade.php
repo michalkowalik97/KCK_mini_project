@@ -23,9 +23,20 @@
         @endif
         <div class="row mb-3">
             <div class="col-1">
-                <a href="/cars/" class="w3-button w3-hover-green w3-black w3-small "><i
-                            class="fas fa-arrow-left text-white"></i> Powrót do listy</a>
+                <a href="/cars/" class="w3-button w3-hover-green w3-black w3-small" ><i
+                            class="fas fa-arrow-left text-white "></i> Powrót do listy</a>
             </div>
+
+            <div class="col-12 col-lg-1 offset-lg-9 mt-3 mt-lg-0">
+                <form action="/cars/{{$car->id}}" method="post">
+                    @csrf
+                    @method("DELETE")
+                    <button  class="w3-button w3-hover-red w3-black w3-small text-decoration-none confirm" data-txt="Czy na pewno chcesz uusnąć samochód?"><i
+                                class="fas fa-trash text-white"></i> Usuń samochód</button>
+                </form>
+
+            </div>
+
         </div>
         <div class="row ">
             <div class="col-12 col-lg-4 mr-0  mr-lg-5  pt-1 mb-5 mb-lg-0 w3-border w3-border-blue">

@@ -15,6 +15,12 @@
             </div>
         @endif
 
+        @if(session("message"))
+            <div class="w3-container py-3 w3-panel w3-blue{{--alert alert-info--}}">
+                {{session("message")}}
+            </div>
+        @endif
+
         <div class="row justify-content-end pb-4">
             <div class="col-1">
                 <a href="/cars/create" class="w3-button w3-hover-green w3-black">Dodaj <i class="fas fa-plus"></i></a>
@@ -31,10 +37,10 @@
                     <img class="w3-border-bottom w3-border-dark card-img-top"
                          {{--src="https://cdn.pixabay.com/photo/2016/04/01/09/11/car-1299198_960_720.png"--}}
                          @if($car->photo == '' || !$car->photo)
-                             src="{{asset('photos/default.png')}}"
+                         src="{{asset('photos/default.png')}}"
                          @else
-                             src="{{asset($car->photo)}}"
-                    @endif
+                         src="{{asset($car->photo)}}"
+                         @endif
                          alt="Car photo" style="width:100%">
                     <div class="card-body">
                         <h4 class="card-title h3">{{$car->renderName()}}</h4>
