@@ -61,7 +61,7 @@
                         <select name="paliwo_alternatywne"
                                 class="w3-select @error('paliwo_alternatywne') w3-border-bottom w3-border-red w3-pale-red @enderror"
                                 id="">
-                            <option value=""  selected>Wybierz paliwo alternatywne</option>
+                            <option value=""  selected>Brak</option>
                             <option value="PB">Benzyna</option>
                             <option value="ON">Diesel</option>
                             <option value="LPG">Gaz</option>

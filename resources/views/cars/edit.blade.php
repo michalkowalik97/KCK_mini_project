@@ -61,7 +61,7 @@
                         <select name="paliwo_alternatywne"
                                 class="w3-select @error('paliwo_alternatywne') w3-border-bottom w3-border-red w3-pale-red @enderror"
                                 id="">
-                            <option value=""  @if($car->alternative_fuel == null) selected @endif>Wybierz paliwo alternatywne</option>
+                            <option value=""  @if($car->alternative_fuel == null) selected @endif>Brak</option>
                             <option value="PB" @if($car->alternative_fuel == "PB") selected @endif >Benzyna</option>
                             <option value="ON" @if($car->alternative_fuel == "ON") selected @endif>Diesel</option>
                             <option value="LPG" @if($car->alternative_fuel == "LPG") selected @endif>Gaz</option>

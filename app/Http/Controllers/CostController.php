@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Car;
+use App\Category;
 use App\Charts\TestChart;
+use App\Cost;
+use App\Repair;
 use Illuminate\Http\Request;
 
 class CostController extends Controller
@@ -15,26 +18,30 @@ class CostController extends Controller
      */
     public function index($id)
     {
-        $car = Car::find($id);
+//        $car = Car::find($id);
 
-        $costs = new TestChart();
-        $costs->minimalist(1)->displayLegend(1);
-        $costs->dataset('koszty','pie',  [rand(10,100),rand(10,100),rand(10,100),rand(10,100)])
-            ->color([/*'#ff0000','#00ff00','#0000ff','#ff7700'*/'rgba(0,0,0,0.0)'])
-            ->backgroundColor(['rgba(255,0,0,0.4)','rgba(0,255,0,0.4)','rgba(0,0,255,0.4)','rgba(255, 119, 0,0.4)']);
-        $costs->labels(['awarie','paliwo','opłaty','naprawy eksploatacyjne']);
+        $costs = Cost::where('car_id', $id)
+            ->with('repairs')
+            ->get();
+
+        dd($costs);
+        /*        $costs = new TestChart();
+                $costs->minimalist(1)->displayLegend(1);
+                $costs->dataset('koszty', 'pie', [rand(10, 100), rand(10, 100), rand(10, 100), rand(10, 100)])
+                    ->color([/*'#ff0000','#00ff00','#0000ff','#ff7700'*//* 'rgba(0,0,0,0.0)'])
+            ->backgroundColor(['rgba(255,0,0,0.4)', 'rgba(0,255,0,0.4)', 'rgba(0,0,255,0.4)', 'rgba(255, 119, 0,0.4)']);
+        $costs->labels(['awarie', 'paliwo', 'opłaty', 'naprawy eksploatacyjne']);
 
         $mileage = new TestChart();
-        $mileage->dataset('przebieg','line',[204890,249876,255765,256234,287890])->color(['rgba(0, 179, 255, 0.8)'])->backgroundColor(['rgba(0, 179, 255, 0.1)']);
-        $mileage->labels(['23-01-2019','01-02-2019','30-04-2019','15-05-2019','22-07-2019']);
-
+        $mileage->dataset('przebieg', 'line', [204890, 249876, 255765, 256234, 287890])->color(['rgba(0, 179, 255, 0.8)'])->backgroundColor(['rgba(0, 179, 255, 0.1)']);
+        $mileage->labels(['23-01-2019', '01-02-2019', '30-04-2019', '15-05-2019', '22-07-2019']);*/
 
 
         if ($car == null)
             return redirect('/cars')->withErrors(['Wystąpił błąd spróbuj ponownie lub skontaktuj się z administratorem.']);
 
         //  dd($car);
-        return view('costs.index',compact('car'));
+        return view('costs.index', compact('costs'));
     }
 
     /**
@@ -42,26 +49,57 @@ class CostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+
+        $categories = Category::all();
+
+        return view('costs.create', compact('id', 'categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
- /*   public function store(Request $request)
+    public function store(Request $request, $car_id)
     {
-        //
-    }*/
+
+        $validatedData = $request->validate([
+            'opis' => 'required|max:255',
+            'przebieg' => 'numeric|nullable',
+            'kategoria' => 'required',
+            'koszt' => 'required'
+        ]);
+
+
+        $car = Car::findOrFail($car_id);
+        $repair = new Repair();
+        $repair->name = $request->opis;
+        $repair->category_id = $request->kategoria;
+        $repair->save();
+
+        $cost = new Cost();
+        $cost->value = (float)$request->koszt;
+        $cost->mileage = (int)$request->przebieg;
+        $cost->repair_id = $repair->id;
+        $cost->car_id = $car_id;
+        $cost->save();
+
+        if ((int)$request->przebieg > 0) {
+            $car->mileage = (int)$request->przebieg;
+            $car->save();
+        }
+
+        return redirect('/cars/' . $car_id)->with('message', "Dodano pomyślnie.");
+
+    }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -72,7 +110,7 @@ class CostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -83,8 +121,8 @@ class CostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -95,7 +133,7 @@ class CostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -109,21 +147,20 @@ class CostController extends Controller
 
         $costs = new TestChart();
         $costs->minimalist(1)->displayLegend(1);
-        $costs->dataset('koszty','pie',  [rand(10,100),rand(10,100),rand(10,100),rand(10,100)])
-            ->color([/*'#ff0000','#00ff00','#0000ff','#ff7700'*/'rgba(0,0,0,0.0)'])
-            ->backgroundColor(['rgba(255,0,0,0.4)','rgba(0,255,0,0.4)','rgba(0,0,255,0.4)','rgba(255, 119, 0,0.4)']);
-        $costs->labels(['awarie','paliwo','opłaty','naprawy eksploatacyjne']);
+        $costs->dataset('koszty', 'pie', [rand(10, 100), rand(10, 100), rand(10, 100), rand(10, 100)])
+            ->color([/*'#ff0000','#00ff00','#0000ff','#ff7700'*/ 'rgba(0,0,0,0.0)'])
+            ->backgroundColor(['rgba(255,0,0,0.4)', 'rgba(0,255,0,0.4)', 'rgba(0,0,255,0.4)', 'rgba(255, 119, 0,0.4)']);
+        $costs->labels(['awarie', 'paliwo', 'opłaty', 'naprawy eksploatacyjne']);
 
         $mileage = new TestChart();
-        $mileage->dataset('przebieg','line',[204890,249876,255765,256234,287890])->color(['rgba(0, 179, 255, 0.8)'])->backgroundColor(['rgba(0, 179, 255, 0.1)']);
-        $mileage->labels(['23-01-2019','01-02-2019','30-04-2019','15-05-2019','22-07-2019']);
-
+        $mileage->dataset('przebieg', 'line', [204890, 249876, 255765, 256234, 287890])->color(['rgba(0, 179, 255, 0.8)'])->backgroundColor(['rgba(0, 179, 255, 0.1)']);
+        $mileage->labels(['23-01-2019', '01-02-2019', '30-04-2019', '15-05-2019', '22-07-2019']);
 
 
         if ($car == null)
             return redirect('/cars')->withErrors(['Wystąpił błąd spróbuj ponownie lub skontaktuj się z administratorem.']);
 
-          //dd($car);
-        return view('costs.stats',compact('car','costs','mileage'));
+        //dd($car);
+        return view('costs.stats', compact('car', 'costs', 'mileage'));
     }
 }

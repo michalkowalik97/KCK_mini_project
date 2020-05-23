@@ -20,7 +20,7 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars = Car::user()->get();
+        $cars = Car::user()->orderBy("name")->get();
 
         return view('cars.list',compact('cars'));
     }
@@ -51,6 +51,7 @@ class CarController extends Controller
             'paliwo_alternatywne' => 'different:paliwo|nullable',
             'car_photo' => 'mimetypes:image/*|file|nullable|max:7000',
         ]);
+
         $car = new Car();
         $car->name = $request->name;
         $car->mileage = $request->przebieg;
@@ -155,6 +156,9 @@ class CarController extends Controller
         $car = Car::find($id);
         if (!$car)
             return redirect()->back()->withErrors(['Coś poszło nie tak, spróbuj jeszcze raz']);
+        Storage::delete($car->photo);
+        $car->photo = null;
+        $car->save();
 
         $car->delete();
 

@@ -66,10 +66,10 @@
             </div>
             <div class="col-12   col-lg-7 mr-0 ml-lg-4  pt-1 w3-border w3-border-blue">
                 <div class="my-2"><span class="h3">Podsumowanie:</span> <span class="float-right"> <a
-                                href="/car/{{$car->id}}/stats/add" class="w3-button w3-hover-green w3-black w3-tiny">Dodaj <i
+                                href="/car/{{$car->id}}/cost/add" class="w3-button w3-hover-green w3-black w3-tiny">Dodaj <i
                                     class="fas fa-plus"></i></a>
                         <a
-                                href="/car/{{$car->id}}/stats" class="w3-button w3-hover-green w3-black w3-tiny">Szczegóły</a></span>
+                                href="/car/{{$car->id}}/costs" class="w3-button w3-hover-green w3-black w3-tiny">Szczegóły</a></span>
                 </div>
                 <table class="table">
                     <tr>

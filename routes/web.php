@@ -33,5 +33,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post("/cars/{id}/edit/photo", "CarController@updatePhoto");
     Route::post("/cars/{id}/delete/photo", "CarController@deletePhoto");
 
+    //costs
+    Route::get("/car/{id}/cost/add", "CostController@create");
+    Route::post("/car/{id}/cost/add", "CostController@store");
+
     Route::resource('cars', 'CarController');
 });

@@ -15,4 +15,8 @@ class Cost extends Model
     {
         return $this->hasOne('App\Repair');
     }
+    public function repairs()
+    {
+        return $this->hasMany('App\Repair','id','repair_id');
+    }
 }
