@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    - Dodaj samochód
+    - Dodaj wpis
 @endsection
 
 @section('content')

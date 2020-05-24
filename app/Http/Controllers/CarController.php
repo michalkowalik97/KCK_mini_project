@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Car;
 use App\Charts\TestChart;
+use App\Cost;
+use App\Fuel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +25,7 @@ class CarController extends Controller
     {
         $cars = Car::user()->orderBy("name")->get();
 
-        return view('cars.list',compact('cars'));
+        return view('cars.list', compact('cars'));
     }
 
     /**
@@ -39,7 +42,7 @@ class CarController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -59,7 +62,7 @@ class CarController extends Controller
         $car->fuel = $request->paliwo;
         $car->alternative_fuel = $request->paliwo_alternatywne;
 
-        if ($request->hasFile('car_photo')){
+        if ($request->hasFile('car_photo')) {
             $path = $request->file('car_photo')->store('photos');
             $car->photo = $path;
         }
@@ -72,37 +75,43 @@ class CarController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $car = Car::find($id);
 
-     /*   $costs = new TestChart();
-        $costs->minimalist(1)->displayLegend(1);
-        $costs->dataset('koszty','pie',  [rand(10,100),rand(10,100),rand(10,100),rand(10,100)])
-            ->color([/*'#ff0000','#00ff00','#0000ff','#ff7700'*//*'rgba(0,0,0,0.0)'])
-            ->backgroundColor(['rgba(255,0,0,0.4)','rgba(0,255,0,0.4)','rgba(0,0,255,0.4)','rgba(255, 119, 0,0.4)']);
-        $costs->labels(['awarie','paliwo','opłaty','naprawy eksploatacyjne']);
+        $costs = Cost::where('car_id', $id)->get();
+        $fuel = Fuel::where('car_id', $id)->get();
 
-        $mileage = new TestChart();
-        $mileage->dataset('przebieg','line',[204890,249876,255765,256234,287890])->color(['rgba(0, 179, 255, 0.8)'])->backgroundColor(['rgba(0, 179, 255, 0.1)']);
-        $mileage->labels(['23-01-2019','01-02-2019','30-04-2019','15-05-2019','22-07-2019']);*/
+        $costsSum = $costs->sum('value');
+        $fuelSum = $fuel->sum('value');
+        $mainFuelSum = $fuel->where('type', $car->fuel)->sum('value');
+
+        $altFuelSum=0;
+        if ($car->alternative_fuel) {
+            $altFuelSum = $fuel->where('type', $car->alternative_fuel)->sum('value');
+        }
+
+        $carbon = Carbon::now(); //new Carbon('first day of this month');
+        $start = (string) $carbon->firstOfMonth() ;
+        $end =  (string)$carbon->lastOfMonth() ;
 
 
+        $currMonthSum = $fuel->whereBetween('created_at',[$start,$end])->sum('value');
 
         if ($car == null)
             return redirect('/cars')->withErrors(['Wystąpił błąd spróbuj ponownie lub skontaktuj się z administratorem.']);
 
-      //  dd($car);
-        return view('cars.show',compact('car'/*,'costs','mileage'*/));
+
+        return view('cars.show', compact('car', 'costs', 'fuel', 'costsSum', 'fuelSum', 'mainFuelSum', 'altFuelSum','currMonthSum'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -111,24 +120,24 @@ class CarController extends Controller
         if ($car)
             return view('cars.edit', compact('car'));
 
-       return redirect("/cars")->withErrors(['Coś poszło nie tak, spróbuj jeszcze raz']);
+        return redirect("/cars")->withErrors(['Coś poszło nie tak, spróbuj jeszcze raz']);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
             'name' => 'required|max:255',
-          //  'przebieg' => 'numeric|nullable',
+            //  'przebieg' => 'numeric|nullable',
             'paliwo' => 'required',
             'paliwo_alternatywne' => 'different:paliwo|nullable',
-           // 'car_photo' => 'mimetypes:image/*|file|nullable|max:7000',
+            // 'car_photo' => 'mimetypes:image/*|file|nullable|max:7000',
         ]);
 
         $car = Car::find($id);
@@ -141,14 +150,14 @@ class CarController extends Controller
         $car->save();
 
 
-     return redirect('/cars/'.$id)->with('message', "Zamiany zostały zapisane.");
+        return redirect('/cars/' . $id)->with('message', "Zamiany zostały zapisane.");
 
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -187,7 +196,7 @@ class CarController extends Controller
 
         $oldPhoto = $car->photo;
 
-        if ($request->hasFile('car_photo')){
+        if ($request->hasFile('car_photo')) {
             $path = $request->file('car_photo')->store('photos');
             $car->photo = $path;
         }
@@ -196,7 +205,7 @@ class CarController extends Controller
 
         Storage::delete($oldPhoto);
 
-        return redirect('/cars/'.$id)->with('message', "Zamiany zostały zapisane.");
+        return redirect('/cars/' . $id)->with('message', "Zamiany zostały zapisane.");
 
     }
 
@@ -210,7 +219,7 @@ class CarController extends Controller
         $car->photo = null;
         $car->save();
 
-        return redirect('/cars/'.$id)->with('message', "Zamiany zostały zapisane.");
+        return redirect('/cars/' . $id)->with('message', "Zamiany zostały zapisane.");
 
     }
 }

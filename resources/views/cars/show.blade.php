@@ -23,7 +23,7 @@
         @endif
         <div class="row mb-3">
             <div class="col-1">
-                <a href="/cars/" class="w3-button w3-hover-green w3-black w3-small" ><i
+                <a href="/cars/" class="w3-button w3-hover-green w3-black w3-small"><i
                             class="fas fa-arrow-left text-white "></i> Powrót do listy</a>
             </div>
 
@@ -31,8 +31,10 @@
                 <form action="/cars/{{$car->id}}" method="post">
                     @csrf
                     @method("DELETE")
-                    <button  class="w3-button w3-hover-red w3-black w3-small text-decoration-none confirm" data-txt="Czy na pewno chcesz uusnąć samochód?"><i
-                                class="fas fa-trash text-white"></i> Usuń samochód</button>
+                    <button class="w3-button w3-hover-red w3-black w3-small text-decoration-none confirm"
+                            data-txt="Czy na pewno chcesz uusnąć samochód?"><i
+                                class="fas fa-trash text-white"></i> Usuń samochód
+                    </button>
                 </form>
 
             </div>
@@ -51,7 +53,7 @@
                      src="{{asset($car->photo)}}"
                      @endif
                      alt="Car photo" style="width:100%">
-                <div class="my-2"><span class="h3">{{$car->renderName()}}</span>
+                <div class="my-2"><span class="h3">{{$car->renderName()}} </span> <br><br>
 
                     <span class="float-right"> <a
                                 href="/cars/{{$car->id}}/edit"
@@ -71,23 +73,20 @@
                         <a
                                 href="/car/{{$car->id}}/costs" class="w3-button w3-hover-green w3-black w3-tiny">Szczegóły</a></span>
                 </div>
-                <table class="table">
+                <table class="table mt-5">
                     <tr>
                         <td>Wydatki ogółem:</td>
-                        <td class="font-weight-bold">{{rand(1000,100000)}} zł</td>
+                        <td class="font-weight-bold">{!! number_format(($costsSum + $fuelSum),2,".",' ') !!} zł</td>
                     </tr>
                     <tr>
                         <td>Wydatki na paliwo:</td>
-                        <td>{{rand(100,10000)}} zł</td>
+                        <td>{{ number_format($fuelSum,2,".",' ')}} zł</td>
                     </tr>
                     <tr>
                         <td>Wydatki na utrzymanie samochodu:</td>
-                        <td>{{rand(100,10000)}} zł</td>
+                        <td>{{ number_format($costsSum,2,".",' ')}} zł</td>
                     </tr>
-                    <tr>
-                        <td>Tutaj coś jeszcze:</td>
-                        <td>{{rand(100,10000)}} zł</td>
-                    </tr>
+
                 </table>
 
             </div>
@@ -104,24 +103,26 @@
                 <table class="table">
                     <tr>
                         <td>Wydatki na paliwo ogółem:</td>
-                        <td class="font-weight-bold">{{rand(1000,100000)}} zł</td>
+                        <td class="font-weight-bold">{{ number_format($fuelSum,2,".",' ')}} zł</td>
                     </tr>
                     <tr>
                         <td>Wydatki na paliwo w bieżącym miesiącu:</td>
-                        <td>{{rand(100,10000)}} zł</td>
+                        <td> {{ number_format($currMonthSum,2,".",' ')}}zł</td>
                     </tr>
                     <tr>
-                        <td>Wydatki na benzynę:</td>
-                        <td>{{rand(100,10000)}} zł <span class="badge badge-success">PB</span></td>
+                        <td>Wydatki na {{$car->fuelName($car->fuel)}}:</td>
+                        <td>{{$mainFuelSum}} zł </td>
                     </tr>
-                    <tr>
-                        <td>Wydatki na LPG:</td>
-                        <td>{{rand(100,10000)}} zł <span class="badge badge-primary">LPG</span></td>
-                    </tr>
-                    <tr>
+                    @if($car->alternative_fuel)
+                        <tr>
+                            <td>Wydatki na {{$car->fuelName($car->alternative_fuel)}}:</td>
+                            <td>{{$altFuelSum}} zł </td>
+                        </tr>
+                    @endif
+      {{--              <tr>
                         <td>Średnie miesięczne wydatki na paliwo:</td>
                         <td>{{rand(100,10000)}} zł</td>
-                    </tr>
+                    </tr>--}}
                 </table>
             </div>
         </div>

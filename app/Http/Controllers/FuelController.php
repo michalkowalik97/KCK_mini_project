@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Car;
+use App\Fuel;
 use Illuminate\Http\Request;
 
 class FuelController extends Controller
@@ -11,9 +13,12 @@ class FuelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $fuel = Fuel::where('car_id', $id)->orderBy('created_at','DESC')->get();
+        $car = Car::findOrFail($id);
+
+        return view('fuel.index', compact('fuel','car'));
     }
 
     /**
@@ -21,9 +26,11 @@ class FuelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $car = Car::findOrFail($id);
+
+        return view('fuel.create', compact('car'));
     }
 
     /**
@@ -32,9 +39,25 @@ class FuelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $car_id)
     {
-        //
+        $validatedData = $request->validate([
+            'kwota' => 'required',
+            'ilosc' => 'required',
+            'paliwo' => 'required'
+        ]);
+
+
+        $fuel = new Fuel();
+        $fuel->car_id = $car_id ;
+        $fuel->value = floatval(str_ireplace(',','.',$request->kwota ) );
+        $fuel->quantity = floatval(str_ireplace(',','.',$request->ilosc ) );//$request->ilosc ;
+        $fuel->price = floatval(str_ireplace(',','.',$request->cena ) ); //$request->cena ;
+        $fuel->type = $request->paliwo ;
+        $fuel->save();
+
+        return redirect('/cars/' . $car_id)->with('message', "Zapisano pomyślnie.");
+
     }
 
     /**

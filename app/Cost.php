@@ -13,7 +13,7 @@ class Cost extends Model
 
     public function repair()
     {
-        return $this->hasOne('App\Repair');
+        return $this->hasOne('App\Repair','id','repair_id');
     }
     public function repairs()
     {

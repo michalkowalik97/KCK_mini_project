@@ -13,7 +13,7 @@ class CategoriesSeeder extends Seeder
     {
         DB::table('categories')->insert([
             'name' => 'awarie',
-            'color' => '#850000',
+            'color' => '#fc2626',
         ]);
 
         DB::table('categories')->insert([

@@ -27,11 +27,11 @@
 
             <div class="col-11">
                 <h3><a href="/cars/{{$car->id}}" class="text-decoration-none">{{$car->renderName()}}</a> <br/><br/>
-                    Podsumowanie kosztów</h3>
+                    Podsumowanie kosztów paliwa</h3>
                 <span class="float-right mb-2"> <a
-                            href="/car/{{$car->id}}/cost/add" class="w3-button w3-hover-green w3-black w3-tiny">Dodaj <i
+                            href="/car/{{$car->id}}/fuel/add" class="w3-button w3-hover-green w3-black w3-tiny">Dodaj <i
                                 class="fas fa-plus"></i></a> </span>
-                @if(count($costs) <= 0)
+                @if(count($fuel) <= 0)
                     <div class="col-10 mr-5 {{--py-3--}} w3-panel w3-blue ">
                         Samochód nie posiada jeszcze żadnych wpisów.
                     </div>
@@ -40,21 +40,20 @@
                     <table class="table table-hover table-bordered ">
                         <tr>
                             <th>Lp.</th>
-                            <th>Opis</th>
                             <th>Kwota</th>
-                            <th>Przy przebiegu</th>
-                            <th>Kategoria</th>
+                            <th>Ilość</th>
+                            <th>Cena za litr</th>
+                            <th>Paliwo</th>
                             <th>Data</th>
                         </tr>
-                        @foreach($costs as $key => $cost)
-                            <tr style="background-color: {{$cost->repair->category->color}}">
+                        @foreach($fuel as $key => $f)
+                            <tr>
                                 <td> {{++$key}} </td>
-                                <td> {{$cost->repair->name}} </td>
-                                <td> {{number_format($cost->value,0,".",' ')  }} zł</td>
-                                <td> @if($cost->mileage > 0) {{number_format($cost->mileage,0,".",' ')  }} km @else
-                                        - @endif</td>
-                                <td>{{$cost->repair->category->name}}</td>
-                                <td>{{$cost->repair->created_at}}</td>
+                                <td> {{number_format($f->value,2,".",' ')  }} zł</td>
+                                <td> {{number_format($f->quantity,2,".",' ')  }}</td>
+                                <td> {{number_format($f->price,2,".",' ')  }} zł</td>
+                                <td> {{$car->fuelName($f->type)}} </td>
+                                <td>{{$f->created_at}}</td>
                             </tr>
 
                         @endforeach
@@ -71,13 +70,14 @@
                                    </tr>
                                @endfor--}}
                         <tr>
-                            <td colspan="2">Suma</td>
+                            <td  >Suma</td>
 
-                            <td>{{ number_format($costs->sum('value'),2,".",' ')  }} zł</td>
+                            <td>{{ number_format($fuel->sum('value'),2,".",' ')  }} zł</td>
+                            <td>{{ number_format($fuel->sum('quantity'),2,".",' ')  }}</td>
                         </tr>
                     </table>
                 @endif
-                    {{$costs->links()}}
+                   {{-- {{$fuel->links()}}--}}
             </div>
         </div>
         <br><br>

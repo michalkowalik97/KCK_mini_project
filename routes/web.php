@@ -29,6 +29,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get("/car/{id}/stats", "CostController@stats");
     Route::get("/car/{id}/costs", "CostController@index");
+    Route::get("/car/{id}/fuel", "FuelController@index");
     Route::get("/cars/{id}/edit/photo", "CarController@editPhoto");
     Route::post("/cars/{id}/edit/photo", "CarController@updatePhoto");
     Route::post("/cars/{id}/delete/photo", "CarController@deletePhoto");
@@ -36,6 +37,10 @@ Route::group(['middleware' => ['auth']], function () {
     //costs
     Route::get("/car/{id}/cost/add", "CostController@create");
     Route::post("/car/{id}/cost/add", "CostController@store");
+
+    //fuel
+    Route::get("/car/{id}/fuel/add", "FuelController@create");
+    Route::post("/car/{id}/fuel/add", "FuelController@store");
 
     Route::resource('cars', 'CarController');
 });

@@ -29,7 +29,18 @@ class Car extends Model
             "ON" => 'danger',
             "LPG" => 'primary',
         ];
-        $badge = ($this->alternative_fuel) ? '<br/><span class="badge badge-'.$colors[$this->fuel].'">'.$this->fuel.'</span>&nbsp<span class="badge badge-'.$colors[$this->alternative_fuel].'">'.$this->alternative_fuel.'</span> ' : '<br/><span class="badge badge-'.$colors[$this->fuel].'">'.$this->fuel.'</span>';
+        $badge = ($this->alternative_fuel) ? '<span class="badge badge-'.$colors[$this->fuel].'">'.$this->fuel.'</span>&nbsp<span class="badge badge-'.$colors[$this->alternative_fuel].'">'.$this->alternative_fuel.'</span> ' : '<span class="badge badge-'.$colors[$this->fuel].'">'.$this->fuel.'</span> ';
         echo $this->name.' '.$badge;
+    }
+
+    public function fuelName($q)
+    {
+        $fuel = [
+            "PB" => 'Benzyna <span class="badge badge-success">PB</span>',
+            "ON" => 'Ropa <span class="badge badge-danger">ON</span>',
+            "LPG" => 'Gaz <span class="badge badge-primary">LPG</span>',
+        ];
+
+        echo $fuel[$q];
     }
 }
