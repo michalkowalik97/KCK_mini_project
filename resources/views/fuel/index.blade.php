@@ -5,11 +5,13 @@
 @endsection
 
 @section('links')
-    @component('components.links',
+    @component('components.links',['car'=>$car,'active'=>"paliwo"] )
+    @endcomponent
+ {{--   @component('components.links',
     ['links'=>["Podsumowanie"=>"/cars/".$car->id,"Koszty"=>"/car/".$car->id."/costs", "Statystyki"=>"/car/".$car->id."/stats"],
     'active'=>"koszty"]
     )
-    @endcomponent
+    @endcomponent--}}
 
 @endsection
 

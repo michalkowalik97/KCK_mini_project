@@ -5,10 +5,7 @@
 @endsection
 
 @section('links')
-    @component('components.links',
-    ['links'=>["Podsumowanie"=>"/cars/".$car->id,"Koszty"=>"/car/".$car->id."/costs", "Statystyki"=>"/car/".$car->id."/stats"],
-    'active'=>"Podsumowanie"]
-    )
+    @component('components.links',['car'=>$car,'active'=>"Podsumowanie"] )
     @endcomponent
 
 @endsection

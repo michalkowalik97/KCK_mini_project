@@ -21,9 +21,9 @@
             </div>
         @endif
 
-        <div class="row justify-content-end pb-4">
+        <div class="row justify-content-end pb-4 mr-5">
             <div class="col-1">
-                <a href="/cars/create" class="w3-button w3-hover-green w3-black">Dodaj <i class="fas fa-plus"></i></a>
+                <a href="/cars/create" class="w3-button w3-hover-green w3-black">Dodaj samochód <i class="fas fa-plus"></i></a>
             </div>
         </div>
         <div class="row">

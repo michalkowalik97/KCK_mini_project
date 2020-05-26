@@ -15,10 +15,10 @@ class FuelController extends Controller
      */
     public function index($id)
     {
-        $fuel = Fuel::where('car_id', $id)->orderBy('created_at','DESC')->get();
+        $fuel = Fuel::where('car_id', $id)->orderBy('created_at', 'DESC')->get();
         $car = Car::findOrFail($id);
 
-        return view('fuel.index', compact('fuel','car'));
+        return view('fuel.index', compact('fuel', 'car'));
     }
 
     /**
@@ -36,7 +36,7 @@ class FuelController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, $car_id)
@@ -47,13 +47,19 @@ class FuelController extends Controller
             'paliwo' => 'required'
         ]);
 
+       // dd($request->all());
 
         $fuel = new Fuel();
-        $fuel->car_id = $car_id ;
-        $fuel->value = floatval(str_ireplace(',','.',$request->kwota ) );
-        $fuel->quantity = floatval(str_ireplace(',','.',$request->ilosc ) );//$request->ilosc ;
-        $fuel->price = floatval(str_ireplace(',','.',$request->cena ) ); //$request->cena ;
-        $fuel->type = $request->paliwo ;
+        $fuel->car_id = $car_id;
+        $fuel->value = floatval(str_ireplace(',', '.', $request->kwota));
+        $fuel->quantity = floatval(str_ireplace(',', '.', $request->ilosc));//$request->ilosc ;
+
+        if ($request->cena)
+            $fuel->price = floatval(str_ireplace(',', '.', $request->cena)); //$request->cena ;
+        else
+            $fuel->price = round(($fuel->value / $fuel->quantity),2) ;
+
+        $fuel->type = $request->paliwo;
         $fuel->save();
 
         return redirect('/cars/' . $car_id)->with('message', "Zapisano pomyślnie.");
@@ -63,7 +69,7 @@ class FuelController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -74,7 +80,7 @@ class FuelController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -85,8 +91,8 @@ class FuelController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -97,7 +103,7 @@ class FuelController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
