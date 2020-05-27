@@ -1,5 +1,4 @@
 @php
-
     $links=
     [
     "Podsumowanie"=>"/cars/".$car->id,
