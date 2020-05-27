@@ -35,6 +35,38 @@
                     </div>
 
                 @else
+
+                    <div class="row">
+                        <div class="col-12">
+
+                            Filtruj <br>
+                        </div>
+                        <form action="#" class="form-inline py-3">
+
+                            <div class="form-group">
+                                <select name="" class="form-control" id="">
+                                    <option value="">Wszystkie kategorie</option>
+                                    <option value="">Awarie</option>
+                                    <option value="">Eksploatacyjne</option>
+                                    <option value="">Opłaty</option>
+                                </select>
+                            </div>
+
+
+                            <div class="form-group">
+                                <select name="sort" class="form-control">
+                                    <option value="null" disabled selected> Sortuj</option>
+                                    <option value=""> Przebieg rosnąco</option>
+                                    <option value=""> Przebieg malejąco</option>
+                                    <option value=""> Kwota malejąco</option>
+                                    <option value=""> Kwota rosnąco</option>
+                                    <option value=""> Data malejąco</option>
+                                    <option value=""> Data rosnąco</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+
                     <table class="table table-hover table-bordered ">
                         <tr>
                             <th>Lp.</th>
@@ -75,7 +107,7 @@
                         </tr>
                     </table>
                 @endif
-                    {{$costs->links()}}
+                {{$costs->links()}}
             </div>
         </div>
         <br><br>

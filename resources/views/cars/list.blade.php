@@ -4,6 +4,13 @@
     - Lista samochodów
 @endsection
 
+@section('links')
+    @component('components.mainLinks',['active'=>""] )
+    @endcomponent
+
+
+@endsection
+
 @section('content')
 
     <div class="container">
@@ -21,18 +28,46 @@
             </div>
         @endif
 
-        <div class="row justify-content-end pb-4 mr-5">
+{{--        <div class="row justify-content-end pb-4 mr-5">
             <div class="col-1">
                 <a href="/cars/create" class="w3-button w3-hover-green w3-black">Dodaj samochód <i class="fas fa-plus"></i></a>
             </div>
-        </div>
-        <div class="row">
+        </div>--}}
+            <div class="row">
+                <div class="col">
+                    <form action="#" class="p-3 form-inline w3-left" >
+                        <div class="form-group">
+                            <select name="sort" class="form-control">
+                                <option value="null" disabled selected> Sortuj</option>
+                                <option value="" > Przebieg rosnąco</option>
+                                <option value="" > Przebieg malejąco</option>
+                                <option value="" > Koszty utrzymania malejąco</option>
+                                <option value="" > Koszty utrzymania rosnąco</option>
+                                <option value="" > Koszty paliwa malejąco</option>
+                                <option value="" > Koszty paliwa rosnąco</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" placeholder="Wyszukaj.." class="form-control" name="search">
+                            <button type="submit" class="form-control" ><i class="fa fa-search"></i></button>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="col text-right w3-right">
+
+                        <a href="/cars/create" class="w3-button w3-hover-green w3-black">Dodaj samochód <i class="fas fa-plus"></i></a>
+
+                </div>
+
+            </div>
+        <div class="row justify-content-center">
 
 
             @forelse($cars as $car)
 
-                <div class="w3-card card m-1 @if(1 % 5 == 0){{-- bg-danger text-white--}} w3-orange @endif"
-                     style="width:32%">
+                <div class="w3-card card m-lg-1 col-12 col-lg-5 @if(1 % 5 == 0){{-- bg-danger text-white--}} w3-orange @endif">
 
                     <img class="w3-border-bottom w3-border-dark card-img-top"
                          {{--src="https://cdn.pixabay.com/photo/2016/04/01/09/11/car-1299198_960_720.png"--}}
