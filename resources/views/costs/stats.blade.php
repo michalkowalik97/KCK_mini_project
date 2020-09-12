@@ -19,14 +19,14 @@
 
                 Wybierz zakres dat <br>
             </div>
-            <form action="#" class="p-3 ml-5 form-inline w3-right">
+            <form action="" class="p-3 ml-5 form-inline w3-right">
 
 
                 <div class="form-group pull-right">
                     <label for="">Od</label>
-                    <input type="date" class="form-control" name="search">
+                    <input type="date" class="form-control" name="from" value="{{Request::get('from')}}">
                     <label for="">do</label>
-                    <input type="date" class="form-control" name="search">
+                    <input type="date" class="form-control" name="to" value="{{Request::get('to')}}">
                     <button type="submit" class="form-control" ><i class="fa fa-search"></i></button>
                 </div>
 

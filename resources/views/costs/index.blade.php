@@ -41,27 +41,28 @@
 
                             Filtruj <br>
                         </div>
-                        <form action="#" class="form-inline py-3">
+                        <form action="" class="form-inline py-3" id="form">
 
                             <div class="form-group">
-                                <select name="" class="form-control" id="">
-                                    <option value="">Wszystkie kategorie</option>
-                                    <option value="">Awarie</option>
-                                    <option value="">Eksploatacyjne</option>
-                                    <option value="">Opłaty</option>
+                                <select name="category" class="form-control" onchange="document.getElementById('form').submit()">
+                                    <option value="null" selected>Wszystkie kategorie</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{$category->id}}" @if(Request::get('category') == $category->id)selected @endif>
+                                            {{$category->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
 
                             <div class="form-group">
-                                <select name="sort" class="form-control">
+                                <select name="sort" class="form-control" onchange="document.getElementById('form').submit()">
                                     <option value="null" disabled selected> Sortuj</option>
-                                    <option value=""> Przebieg rosnąco</option>
-                                    <option value=""> Przebieg malejąco</option>
-                                    <option value=""> Kwota malejąco</option>
-                                    <option value=""> Kwota rosnąco</option>
-                                    <option value=""> Data malejąco</option>
-                                    <option value=""> Data rosnąco</option>
+                                    <option value="mileage-asc" @if(Request::get('sort') =='mileage-asc') selected @endif > Przebieg rosnąco</option>
+                                    <option value="mileage-desc" @if(Request::get('sort') =='mileage-desc') selected @endif > Przebieg malejąco</option>
+                                    <option value="value-asc" @if(Request::get('sort') =='value-asc') selected @endif > Kwota rosnąco</option>
+                                    <option value="value-desc" @if(Request::get('sort') =='value-desc') selected @endif > Kwota malejąco</option>
+                                    <option value="created_at-asc" @if(Request::get('sort') =='created_at-asc') selected @endif > Data rosnąco</option>
+                                    <option value="created_at-desc" @if(Request::get('sort') =='created_at-desc') selected @endif > Data malejąco</option>
                                 </select>
                             </div>
                         </form>
@@ -89,17 +90,6 @@
 
                         @endforeach
 
-                        {{--       @for($i = 1; $i <50; $i++)
-                                   <tr style="background-color: rgba({{rand(0,100)}},{{rand(0,255)}},{{rand(0,255)}},0.4)">
-                                       <td>{{$i}}</td>
-                                       <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pharetra venenatis
-                                           ex vel congue. In cursus id sapien eu viverra. In bibendum, tellus non imperdiet
-                                           aliquam, sem sapien ornare lectus,
-                                       </td>
-                                       <td>{{now()}}</td>
-                                       <td>Lorem ipsum</td>
-                                   </tr>
-                               @endfor--}}
                         <tr>
                             <td colspan="2">Suma</td>
 
@@ -107,7 +97,7 @@
                         </tr>
                     </table>
                 @endif
-                {{$costs->links()}}
+    {{--            {{$costs->links()}}--}}
             </div>
         </div>
         <br><br>

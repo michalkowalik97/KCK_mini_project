@@ -29,8 +29,8 @@ class Car extends Model
             "ON" => 'danger',
             "LPG" => 'primary',
         ];
-        $badge = ($this->alternative_fuel) ? '<span class="badge badge-'.$colors[$this->fuel].'">'.$this->fuel.'</span>&nbsp<span class="badge badge-'.$colors[$this->alternative_fuel].'">'.$this->alternative_fuel.'</span> ' : '<span class="badge badge-'.$colors[$this->fuel].'">'.$this->fuel.'</span> ';
-        echo $this->name.' '.$badge;
+        $badge = ($this->alternative_fuel) ? '<span class="badge badge-' . $colors[$this->fuel] . '">' . $this->fuel . '</span>&nbsp<span class="badge badge-' . $colors[$this->alternative_fuel] . '">' . $this->alternative_fuel . '</span> ' : '<span class="badge badge-' . $colors[$this->fuel] . '">' . $this->fuel . '</span> ';
+        echo $this->name . ' ' . $badge;
     }
 
     public function fuelName($q)
@@ -42,5 +42,33 @@ class Car extends Model
         ];
 
         echo $fuel[$q];
+    }
+
+    public function scopeSort($query, $sort)
+    {
+
+        if ($sort == 'mileage-asc') {
+            return $query->orderBy('mileage', 'asc');
+        } elseif ($sort == 'mileage-desc') {
+            return $query->orderBy('mileage', 'desc');
+        } elseif ($sort == 'name-asc') {
+            return $query->orderBy('name', 'asc');
+        } elseif ($sort == 'name-desc') {
+            return $query->orderBy('name', 'desc');
+        }
+
+        return $query->orderBy('name', 'asc');
+    }
+
+    public function scopeSearch($query,$q)
+    {
+        if ($q == null || $q ==''){
+            return $query;
+        }
+        $q = '%'.$q.'%';
+
+        return $query->where('name','like',$q)
+            ->orWhere('fuel','like',$q)
+            ->orWhere('alternative_fuel','like',$q);
     }
 }

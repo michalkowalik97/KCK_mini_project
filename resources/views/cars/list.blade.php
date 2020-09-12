@@ -5,8 +5,8 @@
 @endsection
 
 @section('links')
-    @component('components.mainLinks',['active'=>""] )
-    @endcomponent
+{{--    @component('components.mainLinks',['active'=>""] )
+    @endcomponent--}}
 
 
 @endsection
@@ -35,21 +35,20 @@
         </div>--}}
             <div class="row">
                 <div class="col">
-                    <form action="#" class="p-3 form-inline w3-left" >
+                    <form action="" class="p-3 form-inline w3-left"  id="filters">
                         <div class="form-group">
-                            <select name="sort" class="form-control">
+                            <select name="sort" class="form-control" onchange="document.getElementById('filters').submit()">
                                 <option value="null" disabled selected> Sortuj</option>
-                                <option value="" > Przebieg rosnąco</option>
-                                <option value="" > Przebieg malejąco</option>
-                                <option value="" > Koszty utrzymania malejąco</option>
-                                <option value="" > Koszty utrzymania rosnąco</option>
-                                <option value="" > Koszty paliwa malejąco</option>
-                                <option value="" > Koszty paliwa rosnąco</option>
+                                <option value="mileage-asc" @if(Request::get('sort')=='mileage-asc')selected @endif  > Przebieg rosnąco</option>
+                                <option value="mileage-desc" @if(Request::get('sort')=='mileage-desc')selected @endif     > Przebieg malejąco</option>
+                                <option value="name-asc" @if(Request::get('sort')=='name-asc')selected @endif     > Nazwa rosnąco</option>
+                                <option value="name-desc" @if(Request::get('sort')=='name-desc')selected @endif    > Nazwa malejąco</option>
+
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <input type="text" placeholder="Wyszukaj.." class="form-control" name="search">
+                            <input type="text" placeholder="Wyszukaj.." class="form-control" name="q" value="{{Request::get('q')}}">
                             <button type="submit" class="form-control" ><i class="fa fa-search"></i></button>
                         </div>
 
@@ -62,7 +61,7 @@
                 </div>
 
             </div>
-        <div class="row justify-content-center">
+        <div class="row justify-content-start">
 
 
             @forelse($cars as $car)

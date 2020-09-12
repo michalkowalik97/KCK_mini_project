@@ -19,36 +19,22 @@ class CostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index(Request $request, $id)
     {
         $car = Car::find($id);
 
         $costs = Cost::where('car_id', $id)
-            ->with('repair')
             ->with('repair.category')
-            ->orderBy('created_at','DESC')
-            //   ->get();
-            ->paginate(50);
+            ->sort($request->sort)
+            ->get();
 
-        //   dd($costs);
-        /*        $costs = new TestChart();
-                $costs->minimalist(1)->displayLegend(1);
-                $costs->dataset('koszty', 'pie', [rand(10, 100), rand(10, 100), rand(10, 100), rand(10, 100)])
-                    ->color([/*'#ff0000','#00ff00','#0000ff','#ff7700'*//* 'rgba(0,0,0,0.0)'])
-            ->backgroundColor(['rgba(255,0,0,0.4)', 'rgba(0,255,0,0.4)', 'rgba(0,0,255,0.4)', 'rgba(255, 119, 0,0.4)']);
-        $costs->labels(['awarie', 'paliwo', 'opłaty', 'naprawy eksploatacyjne']);
+        //          $costs = $costs->where('repair.category_id',1);
 
-        $mileage = new TestChart();
-        $mileage->dataset('przebieg', 'line', [204890, 249876, 255765, 256234, 287890])->color(['rgba(0, 179, 255, 0.8)'])->backgroundColor(['rgba(0, 179, 255, 0.1)']);
-        $mileage->labels(['23-01-2019', '01-02-2019', '30-04-2019', '15-05-2019', '22-07-2019']);*/
-
-
-        //  if ($car == null)
-        //      return redirect('/cars')->withErrors(['Wystąpił błąd spróbuj ponownie lub skontaktuj się z administratorem.']);
-
-        //  dd($car);
-
-        return view('costs.index', compact('costs', 'car'));
+        $categories = Category::all();
+        if (in_array($request->category, $categories->pluck('id')->toArray())) {
+            $costs = $costs->where('repair.category_id', $request->category);
+        }
+        return view('costs.index', compact('costs', 'car', 'categories'));
     }
 
     /**
@@ -87,7 +73,7 @@ class CostController extends Controller
         $repair->save();
 
         $cost = new Cost();
-        $cost->value = floatval(str_ireplace(',','.',$request->koszt ) );
+        $cost->value = floatval(str_ireplace(',', '.', $request->koszt));
         $cost->mileage = $request->przebieg;
         $cost->repair_id = $repair->id;
         $cost->car_id = $car_id;
@@ -148,39 +134,41 @@ class CostController extends Controller
         //
     }
 
-    public function stats($id)
+    public function stats(Request $request, $id)
     {
+        //dd($request->all());
         $car = Car::find($id);
         $categories = Category::all();
-        $costsObj = Cost::where('car_id',$id)
+        $costsObj = Cost::where('car_id', $id)
+            ->dates($request)
             ->with('repair')
             ->get();
         $fuel = Fuel::where('car_id', $id)->get();
 
         $categoriesSum = [];
-        foreach ($categories as $category){
-            $categoriesSum[]=[ "name" => $category->name,  "color" => $category->color, "sum" => $costsObj->where('repair.category_id', $category->id)->sum('value')];
+        foreach ($categories as $category) {
+            $categoriesSum[] = ["name" => $category->name, "color" => $category->color, "sum" => $costsObj->where('repair.category_id', $category->id)->sum('value')];
         }
-        $categoriesSum[]=[ "name" => "paliwo",  "color" => "#26fc26", "sum" => $fuel->sum('value')];
+        $categoriesSum[] = ["name" => "paliwo", "color" => "#26fc26", "sum" => $fuel->sum('value')];
 
         $categoriesSum = collect($categoriesSum);
-      //  dd($categoriesSum);
+        //  dd($categoriesSum);
 
         $costs = new TestChart();
         $costs->minimalist(1)->displayLegend(1);
         $costs->dataset('koszty', 'pie', $categoriesSum->pluck('sum'))
-            ->color([/*'#ff0000','#00ff00','#0000ff','#ff7700'*/ 'rgba(0,0,0,0.0)'])
+            ->color([ 'rgba(0,0,0,0.0)'])
             ->backgroundColor($categoriesSum->pluck('color'));
         $costs->labels($categoriesSum->pluck('name'));
 
         $mileage = new TestChart();
-        $mileage->dataset('przebieg', 'line', $costsObj->where('mileage', '>',0)->pluck('mileage') /*[204890, 249876, 255765, 256234, 287890]*/)->color(['rgba(0, 179, 255, 0.8)'])->backgroundColor(['rgba(0, 179, 255, 0.1)']);
-        $dates = $costsObj->where('mileage', '>',0)->pluck('created_at');
-        foreach ($dates as $key => $date){
-            $carbon  =  new Carbon($date);
+        $mileage->dataset('przebieg', 'line', $costsObj->where('mileage', '>', 0)->pluck('mileage') )->color(['rgba(0, 179, 255, 0.8)'])->backgroundColor(['rgba(0, 179, 255, 0.1)']);
+        $dates = $costsObj->where('mileage', '>', 0)->pluck('created_at');
+        foreach ($dates as $key => $date) {
+            $carbon = new Carbon($date);
             $dates[$key] = $carbon->toDateString();
         }
-        $mileage->labels( $dates);
+        $mileage->labels($dates);
 
 
         if ($car == null)

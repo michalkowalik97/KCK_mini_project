@@ -7,11 +7,11 @@
 @section('links')
     @component('components.links',['car'=>$car,'active'=>"paliwo"] )
     @endcomponent
- {{--   @component('components.links',
-    ['links'=>["Podsumowanie"=>"/cars/".$car->id,"Koszty"=>"/car/".$car->id."/costs", "Statystyki"=>"/car/".$car->id."/stats"],
-    'active'=>"koszty"]
-    )
-    @endcomponent--}}
+    {{--   @component('components.links',
+       ['links'=>["Podsumowanie"=>"/cars/".$car->id,"Koszty"=>"/car/".$car->id."/costs", "Statystyki"=>"/car/".$car->id."/stats"],
+       'active'=>"koszty"]
+       )
+       @endcomponent--}}
 
 @endsection
 
@@ -34,6 +34,59 @@
                             href="/car/{{$car->id}}/fuel/add" class="w3-button w3-hover-green w3-black w3-tiny">Dodaj <i
                                 class="fas fa-plus"></i></a> </span>
                 @if(count($fuel) <= 0)
+                    <div class="row">
+                        <div class="col-12">
+
+                            Filtruj <br>
+                        </div>
+                        <form action="" class="form-inline py-3" id="sort">
+
+                            <div class="form-group">
+                                <select name="type" class="form-control"
+                                        onchange="document.getElementById('sort').submit()">
+                                    <option value="null"  selected>Wszystkie paliwa</option>
+                                    <option value="PB" @if(Request::get('type') == 'PB')selected @endif>Benzyna</option>
+                                    <option value="ON" @if(Request::get('type') == 'ON')selected @endif>Ropa</option>
+                                    <option value="LPG" @if(Request::get('type') == 'LPG')selected @endif>Gaz</option>
+                                </select>
+                            </div>
+
+
+                            <div class="form-group">
+                                <select name="sort" class="form-control"
+                                        onchange="document.getElementById('sort').submit()">
+                                    <option value="null" disabled selected> Sortuj</option>
+                                    <option value="value-asc" @if(Request::get('sort') == 'value-asc') selected @endif >
+                                        Kwota rosnąco
+                                    </option>
+                                    <option value="value-desc"
+                                            @if(Request::get('sort') == 'value-desc') selected @endif > Kwota malejąco
+                                    </option>
+                                    <option value="quantity-asc"
+                                            @if(Request::get('sort') == 'quantity-asc') selected @endif > Ilość rosnąco
+                                    </option>
+                                    <option value="quantity-desc"
+                                            @if(Request::get('sort') == 'quantity-desc') selected @endif > Ilość
+                                        malejąco
+                                    </option>
+                                    <option value="price-asc" @if(Request::get('sort') == 'price-asc') selected @endif >
+                                        Cena za litr rosnąco
+                                    </option>
+                                    <option value="price-desc"
+                                            @if(Request::get('sort') == 'price-desc') selected @endif > Cena za litr
+                                        malejąco
+                                    </option>
+                                    <option value="created_at-asc"
+                                            @if(Request::get('sort') == 'created_at-asc') selected @endif > Data rosnąco
+                                    </option>
+                                    <option value="created_at-desc"
+                                            @if(Request::get('sort') == 'created_at-desc') selected @endif > Data
+                                        malejąco
+                                    </option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
                     <div class="col-10 mr-5 {{--py-3--}} w3-panel w3-blue ">
                         Samochód nie posiada jeszcze żadnych wpisów.
                     </div>
@@ -44,29 +97,50 @@
 
                             Filtruj <br>
                         </div>
-                        <form action="#" class="form-inline py-3">
+                        <form action="" class="form-inline py-3" id="sort">
 
                             <div class="form-group">
-                                <select name="" class="form-control" id="">
-                                    <option value="">Wszystkie paliwa</option>
-                                    <option value="">Benzyna</option>
-                                    <option value="">Ropa</option>
-                                    <option value="">Gaz</option>
+                                <select name="type" class="form-control"
+                                        onchange="document.getElementById('sort').submit()">
+                                    <option value="null"  selected>Wszystkie paliwa</option>
+                                    <option value="PB" @if(Request::get('type') == 'PB')selected @endif>Benzyna</option>
+                                    <option value="ON" @if(Request::get('type') == 'ON')selected @endif>Ropa</option>
+                                    <option value="LPG" @if(Request::get('type') == 'LPG')selected @endif>Gaz</option>
                                 </select>
                             </div>
 
 
                             <div class="form-group">
-                                <select name="sort" class="form-control">
+                                <select name="sort" class="form-control"
+                                        onchange="document.getElementById('sort').submit()">
                                     <option value="null" disabled selected> Sortuj</option>
-                                    <option value=""> Kwota malejąco</option>
-                                    <option value=""> Kwota rosnąco</option>
-                                    <option value=""> Ilość rosnąco</option>
-                                    <option value=""> Ilość malejąco</option>
-                                    <option value=""> Cena za litr rosnąco</option>
-                                    <option value=""> Cena za litr malejąco</option>
-                                    <option value=""> Data malejąco</option>
-                                    <option value=""> Data rosnąco</option>
+                                    <option value="value-asc" @if(Request::get('sort') == 'value-asc') selected @endif >
+                                        Kwota rosnąco
+                                    </option>
+                                    <option value="value-desc"
+                                            @if(Request::get('sort') == 'value-desc') selected @endif > Kwota malejąco
+                                    </option>
+                                    <option value="quantity-asc"
+                                            @if(Request::get('sort') == 'quantity-asc') selected @endif > Ilość rosnąco
+                                    </option>
+                                    <option value="quantity-desc"
+                                            @if(Request::get('sort') == 'quantity-desc') selected @endif > Ilość
+                                        malejąco
+                                    </option>
+                                    <option value="price-asc" @if(Request::get('sort') == 'price-asc') selected @endif >
+                                        Cena za litr rosnąco
+                                    </option>
+                                    <option value="price-desc"
+                                            @if(Request::get('sort') == 'price-desc') selected @endif > Cena za litr
+                                        malejąco
+                                    </option>
+                                    <option value="created_at-asc"
+                                            @if(Request::get('sort') == 'created_at-asc') selected @endif > Data rosnąco
+                                    </option>
+                                    <option value="created_at-desc"
+                                            @if(Request::get('sort') == 'created_at-desc') selected @endif > Data
+                                        malejąco
+                                    </option>
                                 </select>
                             </div>
                         </form>
@@ -104,14 +178,14 @@
                                    </tr>
                                @endfor--}}
                         <tr>
-                            <td  >Suma</td>
+                            <td>Suma</td>
 
                             <td>{{ number_format($fuel->sum('value'),2,".",' ')  }} zł</td>
                             <td>{{ number_format($fuel->sum('quantity'),2,".",' ')  }}</td>
                         </tr>
                     </table>
                 @endif
-                   {{-- {{$fuel->links()}}--}}
+                {{-- {{$fuel->links()}}--}}
             </div>
         </div>
         <br><br>

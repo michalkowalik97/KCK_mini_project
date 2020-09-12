@@ -13,9 +13,14 @@ class FuelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index(Request $request, $id)
     {
-        $fuel = Fuel::where('car_id', $id)->orderBy('created_at', 'DESC')->get();
+        //dd($request->all());
+        $fuel = Fuel::where('car_id', $id);
+        if (in_array($request->type,['ON','PB','LPG'])){
+            $fuel = $fuel->where('type', $request->type);
+        }
+        $fuel = $fuel->sort($request->sort)->get();
         $car = Car::findOrFail($id);
 
         return view('fuel.index', compact('fuel', 'car'));
@@ -47,7 +52,7 @@ class FuelController extends Controller
             'paliwo' => 'required'
         ]);
 
-       // dd($request->all());
+        // dd($request->all());
 
         $fuel = new Fuel();
         $fuel->car_id = $car_id;
@@ -57,7 +62,7 @@ class FuelController extends Controller
         if ($request->cena)
             $fuel->price = floatval(str_ireplace(',', '.', $request->cena)); //$request->cena ;
         else
-            $fuel->price = round(($fuel->value / $fuel->quantity),2) ;
+            $fuel->price = round(($fuel->value / $fuel->quantity), 2);
 
         $fuel->type = $request->paliwo;
         $fuel->save();
