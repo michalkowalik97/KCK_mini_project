@@ -7,15 +7,6 @@
 @section('content')
 
     <div class="w3-card container p-4">
-        {{--@if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif--}}
         <div class="row">
             <div class="col-9">
                 Obecne zdjęcie:
@@ -32,7 +23,7 @@
                     <form action="/cars/{{$car->id}}/delete/photo" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
-                            <input type="submit" class="w3-button w3-black w3-hover-red confirm" data-txt="Czy na pewno chcesz uusnąć zdjęcie?" value="Usuń zdjęcie">
+                            <input type="submit" class="w3-button w3-black w3-hover-red confirm" data-txt="Czy na pewno chcesz usnąć zdjęcie?" value="Usuń zdjęcie">
                         </div>
                     </form>
                 @endif
@@ -41,7 +32,6 @@
 
 
                 <form action="/cars/{{$car->id}}/edit/photo" method="POST" enctype="multipart/form-data">
-                    {{--   <input type="hidden" name="_method" value="PUT">--}}
                     @csrf
 
                     <div class="form-group mt-5">

@@ -161,7 +161,7 @@
                                 <td> {{number_format($f->quantity,2,".",' ')  }}</td>
                                 <td> {{number_format($f->price,2,".",' ')  }} zł</td>
                                 <td> {{$car->fuelName($f->type)}} </td>
-                                <td>{{$f->created_at}}</td>
+                                <td>{{$f->created_at->format('d.m.Y')}}</td>
                             </tr>
 
                         @endforeach
