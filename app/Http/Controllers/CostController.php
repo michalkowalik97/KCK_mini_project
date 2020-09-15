@@ -142,6 +142,7 @@ class CostController extends Controller
         $costsObj = Cost::where('car_id', $id)
             ->dates($request)
             ->with('repair')
+            ->orderBy('created_at')
             ->get();
         $fuel = Fuel::where('car_id', $id)->get();
 

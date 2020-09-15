@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="4dcd6a3c-bcbf-439d-9c64-a8310ba25ded" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/cars/editPhoto.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/cars/editPhoto.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/fuel/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/fuel/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CostController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/photos/T6GQs8jbtZ3ab9sIbegGeEjg6i1uLubxXvBQwrrR.jpeg" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -78,11 +78,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CostController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1859">
-              <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
+            <state relative-caret-position="306">
+              <caret line="144" column="33" selection-start-line="144" selection-start-column="33" selection-end-line="144" selection-end-column="33" />
               <folding>
                 <element signature="e#40#52#0#PHP" expanded="true" />
               </folding>
@@ -91,22 +91,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Cost.php">
+        <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1003">
-              <caret line="59" column="74" selection-start-line="59" selection-start-column="74" selection-end-line="59" selection-end-column="74" />
-              <folding>
-                <element signature="e#23#41#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="425">
+              <caret line="25" column="22" lean-forward="true" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php">
+        <entry file="file://$PROJECT_DIR$/composer.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+            <state relative-caret-position="306">
+              <caret line="18" column="9" lean-forward="true" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -114,7 +111,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/FuelController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-289">
+            <state relative-caret-position="306">
               <caret line="20" column="57" selection-start-line="20" selection-start-column="57" selection-end-line="20" selection-end-column="57" />
               <folding>
                 <element signature="e#40#52#0#PHP" expanded="true" />
@@ -126,10 +123,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="das://95e8c6db-a2de-4af8-986b-3ea3c0372a90/schema/cars/table/fuels">
           <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state projectRestartId="7a1ef941-75cd-4064-aac7-fae5076f4cc3">
-              <filtering>
-                <filter text="" />
-              </filtering>
+            <state projectRestartId="b5d5dabd-2a75-4b2c-b646-87984cfc6015">
+              <filtering />
             </state>
           </provider>
         </entry>
@@ -137,7 +132,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/95e8c6db-a2de-4af8-986b-3ea3c0372a90/console.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-350">
+            <state>
               <caret selection-end-line="53" />
             </state>
           </provider>
@@ -146,16 +141,16 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/fuel/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
+            <state relative-caret-position="2771">
               <caret line="163" column="67" selection-start-line="163" selection-start-column="67" selection-end-line="163" selection-end-column="67" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="das://95e8c6db-a2de-4af8-986b-3ea3c0372a90/schema/cars/table/costs">
           <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state projectRestartId="7a1ef941-75cd-4064-aac7-fae5076f4cc3">
+            <state projectRestartId="b5d5dabd-2a75-4b2c-b646-87984cfc6015">
               <filtering>
                 <filter text="" />
               </filtering>
@@ -166,7 +161,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/cars/editPhoto.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="53">
+            <state relative-caret-position="340">
               <caret line="20" column="21" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
             </state>
           </provider>
@@ -175,7 +170,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CarController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
+            <state relative-caret-position="3383">
               <caret line="209" column="5" selection-start-line="209" selection-start-column="5" selection-end-line="209" selection-end-column="5" />
               <folding>
                 <element signature="e#40#52#0#PHP" expanded="true" />
@@ -272,11 +267,11 @@
         <option value="$PROJECT_DIR$/resources/views/costs/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/costs/stats.blade.php" />
         <option value="$PROJECT_DIR$/app/Cost.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/CostController.php" />
         <option value="$PROJECT_DIR$/resources/views/cars/editPhoto.blade.php" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/95e8c6db-a2de-4af8-986b-3ea3c0372a90/console.sql" />
         <option value="$PROJECT_DIR$/resources/views/fuel/index.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/CostController.php" />
       </list>
     </option>
   </component>
@@ -478,7 +473,7 @@
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="database.console.LAST_STATE" value="true" />
+    <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/fuel" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -565,7 +560,8 @@
       <workItem from="1593428636901" duration="391000" />
       <workItem from="1596574591972" duration="64000" />
       <workItem from="1599897808376" duration="10962000" />
-      <workItem from="1600101523171" duration="7348000" />
+      <workItem from="1600101523171" duration="7977000" />
+      <workItem from="1600148115155" duration="3112000" />
     </task>
     <task id="LOCAL-00001" summary="Sorting and filtering">
       <created>1599940923830</created>
@@ -574,17 +570,23 @@
       <option name="project" value="LOCAL" />
       <updated>1599940923830</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Small bug fixes">
+      <created>1600119320800</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1600119320800</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="181861000" />
+    <option name="totallyTimeSpent" value="185602000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1444563" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14605543" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -599,8 +601,8 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5010661" side_tool="true" weight="0.26152197" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4989339" weight="0.22936763" />
-      <window_info active="true" anchor="bottom" id="Database Console" order="12" visible="true" weight="0.23151125" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4989339" visible="true" weight="0.22936763" />
+      <window_info anchor="bottom" id="Database Console" order="12" weight="0.23151125" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -612,7 +614,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Sorting and filtering" />
-    <option name="LAST_COMMIT_MESSAGE" value="Sorting and filtering" />
+    <MESSAGE value="Small bug fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Small bug fixes" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/resources/js/bootstrap.js">
@@ -634,9 +637,6 @@
           <caret line="63" column="102" selection-start-line="63" selection-start-column="102" selection-end-line="63" selection-end-column="102" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/database/seeds/CategoriesSeeder.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -689,13 +689,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/css/all.min.css">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/components/links.blade.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -853,43 +846,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CostController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1859">
-          <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
-          <folding>
-            <element signature="e#40#52#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Cost.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1003">
-          <caret line="59" column="74" selection-start-line="59" selection-start-column="74" selection-end-line="59" selection-end-column="74" />
-          <folding>
-            <element signature="e#23#41#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CarController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="209" column="5" selection-start-line="209" selection-start-column="5" selection-end-line="209" selection-end-column="5" />
-          <folding>
-            <element signature="e#40#52#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/cars/editPhoto.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="53">
-          <caret line="20" column="21" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://95e8c6db-a2de-4af8-986b-3ea3c0372a90/schema/cars/table/password_resets">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state projectRestartId="7a1ef941-75cd-4064-aac7-fae5076f4cc3">
@@ -918,6 +874,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Cost.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="986">
+          <caret line="59" column="74" selection-start-line="59" selection-start-column="74" selection-end-line="59" selection-end-column="74" />
+          <folding>
+            <element signature="e#23#41#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -927,7 +893,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/FuelController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-289">
+        <state relative-caret-position="306">
           <caret line="20" column="57" selection-start-line="20" selection-start-column="57" selection-end-line="20" selection-end-column="57" />
           <folding>
             <element signature="e#40#52#0#PHP" expanded="true" />
@@ -937,33 +903,72 @@
     </entry>
     <entry file="das://95e8c6db-a2de-4af8-986b-3ea3c0372a90/schema/cars/table/fuels">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="7a1ef941-75cd-4064-aac7-fae5076f4cc3">
-          <filtering>
-            <filter text="" />
-          </filtering>
+        <state projectRestartId="b5d5dabd-2a75-4b2c-b646-87984cfc6015">
+          <filtering />
         </state>
       </provider>
     </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/95e8c6db-a2de-4af8-986b-3ea3c0372a90/console.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-350">
+        <state>
           <caret selection-end-line="53" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/fuel/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
+        <state relative-caret-position="2771">
           <caret line="163" column="67" selection-start-line="163" selection-start-column="67" selection-end-line="163" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/cars/editPhoto.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="21" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CarController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3383">
+          <caret line="209" column="5" selection-start-line="209" selection-start-column="5" selection-end-line="209" selection-end-column="5" />
+          <folding>
+            <element signature="e#40#52#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="das://95e8c6db-a2de-4af8-986b-3ea3c0372a90/schema/cars/table/costs">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="7a1ef941-75cd-4064-aac7-fae5076f4cc3">
+        <state projectRestartId="b5d5dabd-2a75-4b2c-b646-87984cfc6015">
           <filtering>
             <filter text="" />
           </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="22" lean-forward="true" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="9" lean-forward="true" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CostController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="144" column="33" selection-start-line="144" selection-start-column="33" selection-end-line="144" selection-end-column="33" />
+          <folding>
+            <element signature="e#40#52#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
